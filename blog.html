@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post - CODESCAPE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #0a1128; --secondary: #1e3a8a; --accent: #3b82f6;
+            --dark: #020617; --light: #f8fafc; --gray: #94a3b8;
+            --gradient-2: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+        [data-theme="light"] { --dark: #ffffff; --light: #0f172a; --gray: #475569; }
+        body { font-family: 'Poppins', sans-serif; background: var(--dark); color: var(--light); line-height: 1.8; transition: background 0.3s, color 0.3s; }
+        html { scroll-behavior: smooth; }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; backdrop-filter: blur(10px); background: rgba(2, 6, 23, 0.8); border-bottom: 1px solid rgba(59, 130, 246, 0.2); }
+        [data-theme="light"] .navbar { background: rgba(255, 255, 255, 0.9); }
+        .logo { height: 50px; display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo img { height: 100%; width: auto; }
+        .logo-text { font-weight: 600; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; color: var(--light); }
+        .theme-toggle { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 50px; padding: 0.5rem 1rem; cursor: pointer; font-size: 1.2rem; }
+        .blog-post { min-height: 100vh; padding: 120px 3rem 4rem; max-width: 800px; margin: 0 auto; }
+        .back-link { color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+        .blog-category { display: inline-block; padding: 0.5rem 1.5rem; background: rgba(59, 130, 246, 0.1); border-radius: 50px; color: var(--accent); font-size: 0.9rem; margin-bottom: 1.5rem; }
+        h1 { font-size: 3rem; margin-bottom: 1.5rem; line-height: 1.2; }
+        .blog-meta { color: var(--gray); margin-bottom: 3rem; display: flex; gap: 2rem; flex-wrap: wrap; }
+        .blog-content { font-size: 1.1rem; }
+        .blog-content h2 { margin: 2.5rem 0 1rem; font-size: 2rem; }
+        .blog-content p { margin-bottom: 1.5rem; color: var(--gray); }
+        .blog-content code { background: rgba(59, 130, 246, 0.1); padding: 0.2rem 0.5rem; border-radius: 4px; font-family: 'Courier New', monospace; }
+        @media (max-width: 768px) { 
+            .navbar { padding: 1rem; }
+            .logo { height: 40px; }
+            .logo-text { font-size: 1.2rem; }
+            .blog-post { padding: 100px 1rem 2rem; } 
+            h1 { font-size: 2rem; } 
+            .blog-content { font-size: 1rem; }
+            .blog-content h2 { font-size: 1.5rem; }
+        }
+        @media (max-width: 480px) {
+            .navbar { padding: 0.8rem; }
+            .logo-text { display: none; }
+            h1 { font-size: 1.5rem; }
+            .blog-meta { flex-direction: column; gap: 0.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index1.html" class="logo">
+            <img src="logo1.png" alt="CODESCAPE">
+            <span class="logo-text">CODESCAPE</span>
+        </a>
+        <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span></button>
+    </nav>
+
+    <article class="blog-post">
+        <a href="index1.html#blog" class="back-link">← Back to Blog</a>
+        <span class="blog-category" id="category">Technology</span>
+        <h1 id="title">Blog Post Title</h1>
+        <div class="blog-meta">
+            <span id="readTime">5 min read</span>
+            <span id="date">January 2025</span>
+            <span id="author">CODESCAPE Team</span>
+        </div>
+        <div class="blog-content" id="content"></div>
+    </article>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeIcon.textContent = newTheme === 'light' ? '🌙' : '☀️';
+        });
+
+        const posts = {
+            'How we cut inference latency by 60%': {
+                category: 'AI',
+                readTime: '5 min read',
+                date: 'January 2025',
+                author: 'Marco V., Lead AI Engineer',
+                content: `
+                    <h2>The Challenge</h2>
+                    <p>When deploying transformer models to production, we faced significant latency issues. Our initial implementation was taking 300ms per inference, which was unacceptable for real-time applications.</p>
+                    
+                    <h2>Our Approach</h2>
+                    <p>We implemented a multi-pronged optimization strategy:</p>
+                    <p><strong>1. Model Quantization:</strong> We reduced model precision from FP32 to INT8, cutting memory usage by 75% while maintaining 99% accuracy.</p>
+                    <p><strong>2. Batch Processing:</strong> Implemented dynamic batching to process multiple requests simultaneously, improving throughput by 3x.</p>
+                    <p><strong>3. Model Distillation:</strong> Created a smaller student model that retained 95% of the original model's performance.</p>
+                    
+                    <h2>Results</h2>
+                    <p>After optimization, we achieved:</p>
+                    <p>• 60% reduction in latency (300ms → 120ms)</p>
+                    <p>• 4x increase in throughput</p>
+                    <p>• 70% reduction in infrastructure costs</p>
+                    
+                    <h2>Key Takeaways</h2>
+                    <p>Optimizing ML models for production requires a holistic approach. Focus on the entire pipeline, not just the model itself. Measure everything, and always validate that optimizations don't significantly impact accuracy.</p>
+                `
+            },
+            'Scaling with GitOps at CODESCAPE': {
+                category: 'DevOps',
+                readTime: '8 min read',
+                date: 'December 2024',
+                author: 'David Park, DevOps Lead',
+                content: `
+                    <h2>Why GitOps?</h2>
+                    <p>Managing 100+ microservices across multiple environments was becoming a nightmare. We needed a solution that was scalable, auditable, and developer-friendly.</p>
+                    
+                    <h2>Our GitOps Stack</h2>
+                    <p>We chose ArgoCD as our GitOps operator, combined with:</p>
+                    <p>• Kubernetes for orchestration</p>
+                    <p>• Helm for templating</p>
+                    <p>• GitHub Actions for CI</p>
+                    <p>• Prometheus & Grafana for monitoring</p>
+                    
+                    <h2>Implementation Journey</h2>
+                    <p><strong>Phase 1:</strong> We started with a single application, learning the GitOps patterns and building confidence.</p>
+                    <p><strong>Phase 2:</strong> Migrated 20 core services, establishing best practices and automation.</p>
+                    <p><strong>Phase 3:</strong> Full migration of all services with automated rollbacks and progressive delivery.</p>
+                    
+                    <h2>Benefits Realized</h2>
+                    <p>• Deployment time reduced from 2 hours to 10 minutes</p>
+                    <p>• Zero-downtime deployments</p>
+                    <p>• Complete audit trail of all changes</p>
+                    <p>• Developers can self-service deployments</p>
+                    
+                    <h2>Lessons Learned</h2>
+                    <p>Start small, automate everything, and invest in proper monitoring. GitOps is not just a tool—it's a cultural shift that requires buy-in from the entire team.</p>
+                `
+            },
+            'Engineering-first ≠ silos': {
+                category: 'Culture',
+                readTime: '6 min read',
+                date: 'November 2024',
+                author: 'Aisha Khan, CTO',
+                content: `
+                    <h2>The Misconception</h2>
+                    <p>Many people think "engineering-first" means engineers work in isolation, building perfect systems without input from other teams. This couldn't be further from the truth.</p>
+                    
+                    <h2>What Engineering-First Really Means</h2>
+                    <p>At CODESCAPE, engineering-first means:</p>
+                    <p>• Technical excellence is a core value</p>
+                    <p>• Engineers have a seat at the strategic table</p>
+                    <p>• We invest in tools and processes that make engineers productive</p>
+                    <p>• Quality is never compromised for speed</p>
+                    
+                    <h2>Building Cross-Functional Teams</h2>
+                    <p>Our teams include engineers, designers, product managers, and QA working together from day one. We practice:</p>
+                    <p><strong>Embedded Design:</strong> Designers sit with engineering teams, not in a separate department.</p>
+                    <p><strong>Shared Ownership:</strong> Everyone is responsible for the product's success.</p>
+                    <p><strong>Regular Sync:</strong> Daily standups, weekly planning, and monthly retrospectives.</p>
+                    
+                    <h2>The Results</h2>
+                    <p>• 40% faster time-to-market</p>
+                    <p>• Higher quality products</p>
+                    <p>• Better team morale</p>
+                    <p>• Reduced rework and technical debt</p>
+                    
+                    <h2>Conclusion</h2>
+                    <p>Engineering-first culture is about empowering engineers while fostering collaboration. It's about building great products together, not in isolation.</p>
+                `
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const postTitle = urlParams.get('post') || 'How we cut inference latency by 60%';
+        const post = posts[postTitle] || posts['How we cut inference latency by 60%'];
+
+        document.getElementById('category').textContent = post.category;
+        document.getElementById('title').textContent = postTitle;
+        document.getElementById('readTime').textContent = post.readTime;
+        document.getElementById('date').textContent = post.date;
+        document.getElementById('author').textContent = post.author;
+        document.getElementById('content').innerHTML = post.content;
+    </script>
+</body>
+</html>

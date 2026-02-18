@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Details - CODESCAPE</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #0a1128; --secondary: #1e3a8a; --accent: #3b82f6;
+            --dark: #020617; --light: #f8fafc; --gray: #94a3b8;
+            --gradient-2: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            --shadow-2: 0 20px 40px -15px rgba(59, 130, 246, 0.3);
+        }
+        [data-theme="light"] { --dark: #ffffff; --light: #0f172a; --gray: #475569; }
+        body { font-family: 'Poppins', sans-serif; background: var(--dark); color: var(--light); line-height: 1.6; transition: background 0.3s, color 0.3s; }
+        html { scroll-behavior: smooth; }
+        .navbar { position: fixed; top: 0; left: 0; width: 100%; padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center; z-index: 100; backdrop-filter: blur(10px); background: rgba(2, 6, 23, 0.8); border-bottom: 1px solid rgba(59, 130, 246, 0.2); }
+        [data-theme="light"] .navbar { background: rgba(255, 255, 255, 0.9); }
+        .logo { height: 50px; display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo img { height: 100%; width: auto; }
+        .logo-text { font-weight: 600; font-size: 1.5rem; text-transform: uppercase; letter-spacing: 2px; color: var(--light); }
+        .theme-toggle { background: rgba(59, 130, 246, 0.1); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 50px; padding: 0.5rem 1rem; cursor: pointer; font-size: 1.2rem; }
+        .service-detail { min-height: 100vh; padding: 120px 3rem 4rem; max-width: 1000px; margin: 0 auto; }
+        .back-link { color: var(--accent); text-decoration: none; display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 2rem; font-weight: 500; }
+        .back-link:hover { text-decoration: underline; }
+        h1 { font-size: 3rem; margin-bottom: 1rem; background: var(--gradient-2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .service-icon { font-size: 4rem; margin-bottom: 2rem; }
+        .content-section { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(59, 130, 246, 0.1); border-radius: 20px; padding: 2.5rem; margin-bottom: 2rem; }
+        .content-section h2 { margin-bottom: 1rem; color: var(--light); }
+        .content-section p { color: var(--gray); margin-bottom: 1rem; line-height: 1.8; }
+        .features-list { list-style: none; margin: 1.5rem 0; }
+        .features-list li { padding: 0.75rem 0; padding-left: 2rem; position: relative; color: var(--gray); }
+        .features-list li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+        .btn { display: inline-block; padding: 1rem 2.5rem; border-radius: 50px; text-decoration: none; font-weight: 600; background: var(--gradient-2); color: white; box-shadow: var(--shadow-2); transition: all 0.3s; }
+        .btn:hover { transform: translateY(-3px); }
+        @media (max-width: 768px) { 
+            .navbar { padding: 1rem; }
+            .logo { height: 40px; }
+            .logo-text { font-size: 1.2rem; }
+            .service-detail { padding: 100px 1rem 2rem; } 
+            h1 { font-size: 2rem; } 
+            .service-icon { font-size: 3rem; }
+            .content-section { padding: 1.5rem; }
+        }
+        @media (max-width: 480px) {
+            .navbar { padding: 0.8rem; }
+            .logo-text { display: none; }
+            h1 { font-size: 1.5rem; }
+            .service-icon { font-size: 2.5rem; }
+            .content-section { padding: 1.2rem; }
+            .btn { padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index1.html" class="logo">
+            <img src="logo1.png" alt="CODESCAPE">
+            <span class="logo-text">CODESCAPE</span>
+        </a>
+        <button class="theme-toggle" id="themeToggle"><span id="themeIcon">🌙</span></button>
+    </nav>
+
+    <section class="service-detail">
+        <a href="index1.html#services" class="back-link">← Back to Services</a>
+        <div class="service-icon" id="serviceIcon">⚡</div>
+        <h1 id="serviceTitle">Service</h1>
+        
+        <div class="content-section">
+            <h2>Overview</h2>
+            <p id="serviceOverview">Comprehensive technology solutions built with precision and innovation.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Key Features</h2>
+            <ul class="features-list" id="featuresList"></ul>
+        </div>
+
+        <div class="content-section">
+            <h2>Technologies We Use</h2>
+            <p id="technologies">Modern tech stack tailored to your needs.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Why Choose Us</h2>
+            <p>Our team of expert engineers brings years of experience and a proven track record of delivering high-quality solutions. We focus on scalability, security, and performance to ensure your project succeeds.</p>
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="index1.html#contact" class="btn">Get Started →</a>
+        </div>
+    </section>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        themeIcon.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            themeIcon.textContent = newTheme === 'light' ? '🌙' : '☀️';
+        });
+
+        const services = {
+            'Cloud & DevOps': {
+                icon: '⚡',
+                overview: 'Build and deploy scalable cloud infrastructure with our expert DevOps services. We help you automate, monitor, and optimize your entire development lifecycle.',
+                features: ['AWS, Azure, GCP expertise', 'Infrastructure as Code (Terraform, CloudFormation)', 'CI/CD pipeline setup and optimization', '24/7 monitoring and alerting', 'Container orchestration with Kubernetes', 'Cost optimization strategies'],
+                tech: 'AWS, Azure, GCP, Kubernetes, Docker, Terraform, Jenkins, GitLab CI, Prometheus, Grafana'
+            },
+            'AI & Machine Learning': {
+                icon: '🤖',
+                overview: 'Leverage the power of AI and machine learning to transform your business. From computer vision to natural language processing, we build intelligent systems that learn and adapt.',
+                features: ['Custom ML model development', 'Computer vision solutions', 'Natural Language Processing', 'Predictive analytics', 'LLM integration and fine-tuning', 'MLOps and model deployment'],
+                tech: 'Python, TensorFlow, PyTorch, Scikit-learn, OpenAI, Hugging Face, MLflow, Kubeflow'
+            },
+            'Product Design': {
+                icon: '🎨',
+                overview: 'Create beautiful, intuitive user experiences that delight your customers. Our design team combines aesthetics with usability to build products people love.',
+                features: ['User research and testing', 'UX/UI design', 'Design systems creation', 'Prototyping and wireframing', 'Responsive design', 'Accessibility compliance'],
+                tech: 'Figma, Adobe XD, Sketch, InVision, Principle, Framer'
+            },
+            'Legacy Modernization': {
+                icon: '🏗️',
+                overview: 'Transform your legacy systems into modern, scalable applications. We help you migrate to cloud-native architectures while maintaining business continuity.',
+                features: ['System assessment and planning', 'Microservices architecture', 'Database migration', 'API modernization', 'Performance optimization', 'Zero-downtime migration'],
+                tech: 'Spring Boot, Node.js, .NET Core, PostgreSQL, MongoDB, Redis, RabbitMQ, Kafka'
+            },
+            'Data Engineering': {
+                icon: '📊',
+                overview: 'Build robust data pipelines and warehouses that power your analytics and decision-making. We help you collect, process, and analyze data at scale.',
+                features: ['Data pipeline development', 'Data warehouse design', 'Real-time data processing', 'ETL/ELT processes', 'Data governance', 'Big data solutions'],
+                tech: 'Apache Spark, Airflow, Kafka, Snowflake, BigQuery, Redshift, dbt, Databricks'
+            },
+            'Cybersecurity': {
+                icon: '🔐',
+                overview: 'Protect your digital assets with comprehensive security solutions. We help you identify vulnerabilities and implement robust security measures.',
+                features: ['Security audits and assessments', 'Penetration testing', 'Compliance (SOC 2, GDPR, HIPAA)', 'Threat monitoring', 'Incident response', 'Security training'],
+                tech: 'OWASP, Burp Suite, Metasploit, Wireshark, Splunk, AWS Security Hub, Azure Sentinel'
+            }
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const serviceName = urlParams.get('service') || 'Cloud & DevOps';
+        const service = services[serviceName] || services['Cloud & DevOps'];
+
+        document.getElementById('serviceIcon').textContent = service.icon;
+        document.getElementById('serviceTitle').textContent = serviceName;
+        document.getElementById('serviceOverview').textContent = service.overview;
+        document.getElementById('technologies').textContent = service.tech;
+
+        const featuresList = document.getElementById('featuresList');
+        service.features.forEach(feature => {
+            const li = document.createElement('li');
+            li.textContent = feature;
+            featuresList.appendChild(li);
+        });
+    </script>
+</body>
+</html>
